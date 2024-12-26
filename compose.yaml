@@ -9,8 +9,8 @@ services:
       - PASSWORD_HASH=${PASSWORD_HASH}
       - PORT=51821
       - WG_PORT=51820
-    volumes:
-      - /home/dev/.wg-easy:/etc/wireguard
+    #volumes:
+     # - /root/.wg-easy:/etc/wireguard
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
