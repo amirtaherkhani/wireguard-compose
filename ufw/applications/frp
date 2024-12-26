@@ -1,0 +1,9 @@
+[FRP-Server]
+title=FRP Server
+description=Allow FRP Server ports
+ports=7000,51821/tcp|51820/udp
+
+[FRP-Client]
+title=FRP Client
+description=Allow FRP Client outbound traffic
+ports=7000

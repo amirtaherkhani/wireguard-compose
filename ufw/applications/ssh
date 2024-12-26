@@ -1,0 +1,4 @@
+[SSH]
+title=SSH
+description=Open SSH ports for remote login
+ports=22,2233/tcp

@@ -1,0 +1,16 @@
+[common]
+server_addr = "185.73.115.25"
+server_port = 7000
+token = "71f8ef97fd3473e7d552d4e1c7e6dff0"
+
+[wg-easy-wireguard]
+type = "udp"
+local_ip = "127.0.0.1"
+local_port = 51820
+remote_port = 52820
+
+[wg-easy-web]
+type = "tcp"
+local_ip = "127.0.0.1"
+local_port = 51821
+remote_port = 52821

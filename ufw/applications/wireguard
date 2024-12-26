@@ -1,0 +1,4 @@
+[WireGuard]
+title=WireGuard VPN
+description=Open WireGuard ports for VPN
+ports=51820,51821/udp|51821/tcp
