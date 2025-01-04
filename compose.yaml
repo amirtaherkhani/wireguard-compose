@@ -1,16 +1,13 @@
 services:
   wg-easy:
-    image: ghcr.io/wg-easy/wg-easy
+    image: ghcr.io/wg-easy/wg-easy:latest
+    hostname: wg-easy-server
     container_name: wg-easy
-    privileged: true  # Allow the container to modify system settings
-    environment:
-      - LANG=en
-      - WG_HOST=${WG_HOST}
-      - PASSWORD_HASH=${PASSWORD_HASH}
-      - PORT=51821
-      - WG_PORT=51820
-    #volumes:
-     # - /root/.wg-easy:/etc/wireguard
+    privileged: true
+    env_file:
+      - ./.env
+    volumes:
+      - ~/.config/.wg-easy:/etc/wireguard
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -19,8 +16,18 @@ services:
       - net.ipv4.ip_forward=1
     restart: unless-stopped
     ports:
-      - 51821:51821/tcp
-      - 51820:51820/udp
+#       - 51821:51821/tcp
+       - 51820:51820/udp
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.wg-easy.rule=Host(`${HOST_NAME}`)
+      - traefik.http.routers.wg-easy.entrypoints=web, websecure
+      - traefik.http.routers.wg-easy.tls=true
+      - traefik.http.routers.wg-easy.tls.certresolver=letsencrypt
+      - traefik.http.services.wg-easy.loadBalancer.server.port=51821
+#      - traefik.udp.routers.wg-router.entrypoints=wireguard  # Use the 'wireguard' entrypoint
+#      - traefik.udp.routers.wg-router.service=wg-service  # Link to the wg-service
+#      - traefik.udp.services.wg-service.loadbalancer.server.port=51820  # Internal UDP port exposed by wg-easy
     healthcheck:
       test:
         - CMD
