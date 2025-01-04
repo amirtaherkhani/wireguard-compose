@@ -1,1 +1,1 @@
-# wg-frp
+WireGuard Docker Compose
